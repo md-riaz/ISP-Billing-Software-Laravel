@@ -33,22 +33,25 @@ class ReportController extends Controller {
     }
 
     public function billing(Request $request) {
-        $month = $request->month ?? now()->format('Y-m');
+        $billingMonth = $request->billing_month ?? now()->format('Y-m');
 
         $invoices = Invoice::with('customer')
-            ->where('billing_month', $month)
+            ->where('billing_month', $billingMonth)
             ->orderByDesc('created_at')
             ->get();
 
         $summary = [
-            'total_invoiced' => $invoices->sum('total_amount'),
+            'total_billed' => $invoices->sum('total_amount'),
             'total_paid' => $invoices->sum('paid_amount'),
             'total_due' => $invoices->sum('due_amount'),
             'count' => $invoices->count(),
-            'paid_count' => $invoices->where('status','paid')->count(),
             'unpaid_count' => $invoices->whereIn('status',['unpaid','partially_paid'])->count(),
+            'by_status' => $invoices->groupBy('status')->map(fn($g) => [
+                'count' => $g->count(),
+                'amount' => $g->sum('total_amount'),
+            ]),
         ];
 
-        return view('reports.billing', compact('invoices','summary','month'));
+        return view('reports.billing', compact('invoices','summary','billingMonth'));
     }
 }
