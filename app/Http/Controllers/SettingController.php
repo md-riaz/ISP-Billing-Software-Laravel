@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 class SettingController extends Controller {
     public function company() {
         $tenant = app('currentTenant');
-        $settings = Setting::get();
-        return view('settings.company', compact('tenant','settings'));
+        return view('settings.company', compact('tenant'));
     }
 
     public function updateCompany(Request $request) {

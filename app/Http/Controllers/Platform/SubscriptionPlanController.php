@@ -47,6 +47,10 @@ class SubscriptionPlanController extends Controller {
         return redirect()->route('platform.plans.index')->with('success', 'Plan created.');
     }
 
+    public function show(SubscriptionPlan $plan) {
+        return redirect()->route('platform.plans.edit', $plan);
+    }
+
     public function edit(SubscriptionPlan $plan) {
         return view('platform.plans.edit', compact('plan'));
     }

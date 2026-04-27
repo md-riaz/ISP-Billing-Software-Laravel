@@ -40,6 +40,10 @@ class StaffController extends Controller {
         return redirect()->route('staff.index')->with('success', 'Staff member created.');
     }
 
+    public function show(User $staff) {
+        return redirect()->route('staff.edit', $staff);
+    }
+
     public function edit(User $staff) {
         return view('staff.edit', compact('staff'));
     }
