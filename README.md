@@ -1,58 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌐 ISP Billing Software
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![PHP](https://img.shields.io/badge/PHP-8.3-blue?logo=php)
+![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## About Laravel
+A **SaaS multi-tenant ISP Billing & Operations Platform** built for internet service providers in Bangladesh. Each ISP gets a secure, isolated workspace to manage customers, billing, collections, and network devices — all in one dashboard.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Multi-tenant SaaS** — platform owner manages ISP tenants with subscription plans and usage limits
+- **Customer Management** — full CRUD with service status tracking (active, suspended, terminated)
+- **Internet Packages** — create and manage speed-tiered packages with BDT (৳) pricing
+- **Invoice Generation** — bulk and single invoice generation with line-item detail
+- **Payment Collection** — record payments, allocate to invoices, reverse transactions
+- **Dues Tracking** — real-time outstanding balance view per customer
+- **OLT Device Management** — register OLT devices; link ONU/service mappings for provisioning workflows
+- **Areas & POPs** — organise coverage zones and Points of Presence
+- **Staff & Role Management** — role-based access control via `spatie/laravel-permission`
+- **SMS Templates & Logs** — configure notification templates, track send history
+- **Reports** — billing reports and collection summaries with date range filters
+- **Audit Logs** — full activity trail per tenant
+- **Platform Admin Panel** — manage tenants, subscription plans, and platform-level payments
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🏗️ Tech Stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Layer        | Technology                               |
+|--------------|------------------------------------------|
+| Backend      | PHP 8.3 · Laravel 12                     |
+| Frontend     | Tailwind CSS · Alpine.js · Vite          |
+| Database     | SQLite (swappable to MySQL / PostgreSQL) |
+| Auth & RBAC  | Laravel Auth · spatie/laravel-permission |
+| Currency     | Bangladeshi Taka (BDT / ৳)              |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🚀 Quick Start
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone the repository
+git clone https://github.com/md-riaz/ISP-Billing-Software-Laravel.git
+cd ISP-Billing-Software-Laravel
 
-php artisan boost:install
+# 2. Install PHP dependencies
+composer install
+
+# 3. Install JS dependencies and build assets
+npm install && npm run build
+
+# 4. Set up environment
+cp .env.example .env
+php artisan key:generate
+
+# 5. Create the SQLite database file
+touch database/database.sqlite
+
+# 6. Run migrations
+php artisan migrate
+
+# 7. Seed demo data
+php artisan db:seed
+
+# 8. Start the development server
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Visit `http://localhost:8000` in your browser.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🔐 Demo Credentials
 
-## Code of Conduct
+| Role           | Email                 | Password   |
+|----------------|-----------------------|------------|
+| Platform Admin | `admin@platform.com`  | `password` |
+| Tenant Admin   | `admin@demo.com`      | `password` |
+| Collector      | `collector@demo.com`  | `password` |
+| Technician     | `tech@demo.com`       | `password` |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> **Platform Admin** logs in at `/login` and is redirected to `/platform/dashboard`.  
+> All tenant users log in at `/login` and land on the tenant dashboard.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📋 Module Overview
 
-## License
+| Module             | Description                                                           |
+|--------------------|-----------------------------------------------------------------------|
+| Platform Dashboard | Overview of all tenants, subscriptions, and platform health           |
+| Tenant Management  | Create, suspend, and manage ISP tenants and their subscriptions       |
+| Subscription Plans | Define Starter / Growth / Pro plans with feature and usage limits     |
+| Customer Management| Add, edit, and track customer profiles and service connections        |
+| Packages           | Manage internet packages with speed tiers and BDT pricing            |
+| Services           | Map customers to packages; update service activation status           |
+| Areas & POPs       | Define geographic areas and Points of Presence                        |
+| OLT Devices        | Register OLT hardware; link customer ONUs for provisioning workflows  |
+| Invoices           | Generate monthly invoices in bulk or individually; view invoice detail|
+| Payments           | Collect and allocate payments; reverse erroneous entries              |
+| Dues               | View per-customer outstanding balances at a glance                    |
+| Staff              | Manage staff accounts with scoped role assignments                    |
+| Reports            | Billing and collection reports with date range filters                |
+| SMS                | Configure reusable message templates and review delivery logs         |
+| Audit Logs         | Immutable activity trail scoped per tenant                            |
+| Settings           | Company profile and tenant-level configuration                        |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🏢 SaaS Architecture
+
+The platform uses a **single-database multi-tenancy** model:
+
+- Every data table carries a `tenant_id` foreign key; a custom `ResolveTenant` middleware injects the active tenant into every authenticated request.
+- **Platform users** (`tenant_id = null`) access `/platform/*` routes protected by the `platform` middleware.
+- **Tenant users** are scoped to their ISP workspace via the `tenant` + `resolve.tenant` middleware stack.
+- Subscription plans enforce hard limits on the number of customers, staff members, OLT devices, and monthly SMS messages per tenant.
+- Roles (`tenant_admin`, `accounts_manager`, `billing_officer`, `collector`, `support_agent`, `technician`, `area_manager`) are managed via `spatie/laravel-permission`.
+
+---
+
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/          # Tenant-level feature controllers
+│   │   │   └── Platform/         # Platform-level controllers
+│   │   └── Middleware/           # Auth, tenant resolution middleware
+│   ├── Models/                   # Eloquent models (Tenant, Customer, Invoice …)
+│   └── Services/                 # Business logic service classes
+├── database/
+│   ├── migrations/               # All schema migrations
+│   └── seeders/                  # Demo data seeder with sample ISP
+├── resources/
+│   └── views/                    # Blade templates (Tailwind CSS + Alpine.js)
+├── routes/
+│   └── web.php                   # All application routes
+└── tests/                        # Feature and unit tests
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes with clear, descriptive messages
+4. Open a Pull Request describing what you changed and why
+
+Please ensure existing tests pass and add tests for new functionality where applicable.
+
+---
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT License](LICENSE).
