@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ISP Billing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-indigo-900 via-indigo-800 to-purple-900 flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg mb-4">
+                <i class="fas fa-wifi text-indigo-600 text-2xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-white">ISP Billing</h1>
+            <p class="text-indigo-300 mt-1">Sign in to your account</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+            @if($errors->any())
+            <div class="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 mb-4 text-sm">
+                {{ $errors->first() }}
+            </div>
+            @endif
+
+            <form method="POST" action="{{ route('login.post') }}" class="space-y-4">
+                @csrf
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="email" name="email" value="{{ old('email') }}" required
+                               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+                               placeholder="your@email.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" name="password" required
+                               class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
+                               placeholder="••••••••">
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" name="remember" id="remember" class="rounded border-gray-300 text-indigo-600">
+                    <label for="remember" class="ml-2 text-sm text-gray-600">Remember me</label>
+                </div>
+                <button type="submit"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center space-x-2">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 text-center">
+                <a href="{{ route('platform.dashboard') }}" class="text-sm text-gray-500 hover:text-indigo-600">
+                    <i class="fas fa-shield-alt mr-1"></i>Platform Admin Login
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
