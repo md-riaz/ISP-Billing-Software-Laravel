@@ -143,6 +143,142 @@ The platform uses a **single-database multi-tenancy** model:
 
 ---
 
+## 📸 Product Tour
+
+> All screenshots below are captured from the live demo seed data at 1440 × 900 px.
+
+### Authentication
+
+| Login |
+|-------|
+| ![Login](public/screenshots/01-login.png) |
+
+---
+
+### 🔧 Platform Admin
+
+The Platform Admin space (`/platform/*`) is where the SaaS owner manages all ISP tenants, subscription plans, and platform-level payments.
+
+| Platform Dashboard | Tenant List |
+|---|---|
+| ![Platform Dashboard](public/screenshots/02-platform-dashboard.png) | ![Tenants](public/screenshots/03-platform-tenants.png) |
+
+| Create Tenant | Tenant Detail |
+|---|---|
+| ![Create Tenant](public/screenshots/04-platform-tenant-create.png) | ![Tenant Detail](public/screenshots/05-platform-tenant-detail.png) |
+
+| Subscription Plans | Create Plan |
+|---|---|
+| ![Plans](public/screenshots/06-platform-plans.png) | ![Create Plan](public/screenshots/07-platform-plan-create.png) |
+
+---
+
+### 🏠 Tenant Dashboard
+
+Each ISP tenant gets a dedicated, isolated workspace with a summarised overview of customers, billing, and collections.
+
+| Tenant Dashboard |
+|---|
+| ![Tenant Dashboard](public/screenshots/08-tenant-dashboard.png) |
+
+---
+
+### 👥 Customers
+
+| Customer List | Add Customer | Customer Profile |
+|---|---|---|
+| ![Customers](public/screenshots/09-customers.png) | ![Add Customer](public/screenshots/10-customer-create.png) | ![Customer Detail](public/screenshots/11-customer-detail.png) |
+
+---
+
+### 📦 Packages
+
+| Package List | Create Package |
+|---|---|
+| ![Packages](public/screenshots/12-packages.png) | ![Create Package](public/screenshots/13-package-create.png) |
+
+---
+
+### 🗺️ Areas & POPs
+
+| Areas & Points of Presence |
+|---|
+| ![Areas & POPs](public/screenshots/14-areas-pops.png) |
+
+---
+
+### 🔌 Services
+
+| Service List | Assign Service | Service Detail |
+|---|---|---|
+| ![Services](public/screenshots/15-services.png) | ![Assign Service](public/screenshots/16-service-create.png) | ![Service Detail](public/screenshots/35-service-detail.png) |
+
+---
+
+### 📡 OLT Devices
+
+| OLT Device List | Add OLT Device | OLT Device Detail |
+|---|---|---|
+| ![OLT Devices](public/screenshots/17-olt-devices.png) | ![Add OLT Device](public/screenshots/18-olt-device-create.png) | ![OLT Detail](public/screenshots/34-olt-device-detail.png) |
+
+---
+
+### 🧾 Invoices
+
+| Invoice List | Generate Invoices | Invoice Detail |
+|---|---|---|
+| ![Invoices](public/screenshots/19-invoices.png) | ![Generate](public/screenshots/20-invoice-generate.png) | ![Invoice Detail](public/screenshots/21-invoice-detail.png) |
+
+---
+
+### 💳 Payments
+
+| Payment List | Record Payment | Payment Detail |
+|---|---|---|
+| ![Payments](public/screenshots/22-payments.png) | ![Record Payment](public/screenshots/23-payment-create.png) | ![Payment Detail](public/screenshots/24-payment-detail.png) |
+
+---
+
+### 💰 Dues
+
+| Outstanding Dues |
+|---|
+| ![Dues](public/screenshots/25-dues.png) |
+
+---
+
+### 📊 Reports
+
+| Billing Report | Collections Report |
+|---|---|
+| ![Billing Report](public/screenshots/26-report-billing.png) | ![Collections Report](public/screenshots/27-report-collections.png) |
+
+---
+
+### 👨‍💼 Staff Management
+
+| Staff List | Add Staff Member |
+|---|---|
+| ![Staff](public/screenshots/28-staff.png) | ![Add Staff](public/screenshots/29-staff-create.png) |
+
+---
+
+### 📱 SMS
+
+| SMS Templates | SMS Logs |
+|---|---|
+| ![SMS Templates](public/screenshots/30-sms-templates.png) | ![SMS Logs](public/screenshots/31-sms-logs.png) |
+
+---
+
+### 🔍 Audit Logs & Settings
+
+| Audit Logs | Company Settings |
+|---|---|
+| ![Audit Logs](public/screenshots/32-audit-logs.png) | ![Settings](public/screenshots/33-settings.png) |
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
