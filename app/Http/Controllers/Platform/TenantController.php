@@ -69,7 +69,11 @@ class TenantController extends Controller {
             'billing_cycle' => $validated['billing_cycle'],
             'price' => $price,
             'starts_at' => now(),
-            'expires_at' => $validated['billing_cycle'] === 'trial' ? now()->addDays($validated['trial_days'] ?? 14) : now()->addMonth(),
+            'expires_at' => match ($validated['billing_cycle']) {
+                'trial'  => now()->addDays($validated['trial_days'] ?? 14),
+                'yearly' => now()->addYear(),
+                default  => now()->addMonth(),
+            },
             'status' => 'trial',
         ]);
 

@@ -41,14 +41,18 @@ class StaffController extends Controller {
     }
 
     public function show(User $staff) {
+        $this->authorizeTenantStaff($staff);
         return redirect()->route('staff.edit', $staff);
     }
 
     public function edit(User $staff) {
+        $this->authorizeTenantStaff($staff);
         return view('staff.edit', compact('staff'));
     }
 
     public function update(Request $request, User $staff) {
+        $this->authorizeTenantStaff($staff);
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:20',
@@ -65,10 +69,18 @@ class StaffController extends Controller {
     }
 
     public function destroy(User $staff) {
+        $this->authorizeTenantStaff($staff);
+
         if ($staff->id === auth()->id()) {
             return back()->with('error', 'Cannot delete yourself.');
         }
         $staff->delete();
         return redirect()->route('staff.index')->with('success', 'Staff member deleted.');
+    }
+
+    private function authorizeTenantStaff(User $staff): void {
+        if ($staff->tenant_id !== app('currentTenant')->id) {
+            abort(403, 'Access denied.');
+        }
     }
 }

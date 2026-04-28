@@ -1,7 +1,6 @@
 <?php
 namespace App\Services;
 
-use App\Models\Customer;
 use App\Models\CustomerService;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
@@ -26,11 +25,8 @@ class InvoiceGenerationService {
             $discountAmount = round($subtotal * $customer->discount_value / 100, 2);
         }
 
-        // Calculate previous due
-        $previousDue = $this->getCustomerPreviousDue($customer);
-
         $adjustmentAmount = $options['adjustment_amount'] ?? 0;
-        $totalAmount = $subtotal - $discountAmount + $previousDue + $adjustmentAmount;
+        $totalAmount = $subtotal - $discountAmount + $adjustmentAmount;
         $totalAmount = max(0, $totalAmount);
 
         $invoiceNumber = $this->generateInvoiceNumber($tenant->id);
@@ -45,7 +41,7 @@ class InvoiceGenerationService {
             'issue_date' => $issueDate,
             'due_date' => $dueDate,
             'subtotal' => $subtotal,
-            'previous_due' => $previousDue,
+            'previous_due' => 0,
             'discount_amount' => $discountAmount,
             'adjustment_amount' => $adjustmentAmount,
             'total_amount' => $totalAmount,
@@ -103,14 +99,6 @@ class InvoiceGenerationService {
         }
 
         return $generated;
-    }
-
-    private function getCustomerPreviousDue(Customer $customer): float {
-        $totalDue = Invoice::where('customer_id', $customer->id)
-            ->whereIn('status', ['unpaid', 'partially_paid'])
-            ->sum('due_amount');
-
-        return (float)$totalDue;
     }
 
     public function generateInvoiceNumber(int $tenantId): string {

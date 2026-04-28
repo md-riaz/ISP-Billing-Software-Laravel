@@ -24,8 +24,16 @@ class LoginController extends Controller {
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
             $user = Auth::user();
+
+            if ($user->status !== 'active') {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->withErrors(['email' => 'Your account is inactive. Please contact support.'])->withInput();
+            }
+
+            $request->session()->regenerate();
             $user->update(['last_login_at' => now()]);
 
             if ($user->isPlatformAdmin()) {

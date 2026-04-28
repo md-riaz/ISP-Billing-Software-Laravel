@@ -21,7 +21,9 @@ class ServiceController extends Controller {
     }
 
     public function create(Request $request) {
-        $customers = Customer::where('status','active')->orWhere('status','pending_installation')->orderBy('full_name')->get();
+        $customers = Customer::where(function ($q) {
+            $q->where('status', 'active')->orWhere('status', 'pending_installation');
+        })->orderBy('full_name')->get();
         $packages = Package::where('is_active', true)->orderBy('package_name')->get();
         $oltDevices = OltDevice::where('status','active')->orderBy('device_name')->get();
         $selectedCustomer = $request->filled('customer_id') ? Customer::find($request->customer_id) : null;
