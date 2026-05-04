@@ -28,19 +28,22 @@
     </dl>
     <div class="flex gap-2 pt-2">
         @if($service->status !== 'active')
-        <form method="POST" action="{{ route('services.activate', $service) }}">
+        <form method="POST" action="{{ route('services.update-status', $service) }}">
             @csrf
+            <input type="hidden" name="status" value="active">
             <button class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm">Activate</button>
         </form>
         @endif
         @if($service->status === 'active')
-        <form method="POST" action="{{ route('services.suspend', $service) }}">
+        <form method="POST" action="{{ route('services.update-status', $service) }}">
             @csrf
+            <input type="hidden" name="status" value="suspended">
             <button class="bg-yellow-500 text-white px-4 py-2 rounded-lg text-sm">Suspend</button>
         </form>
         @endif
-        <form method="POST" action="{{ route('services.destroy', $service) }}" onsubmit="return confirm('Terminate this service?')">
-            @csrf @method('DELETE')
+        <form method="POST" action="{{ route('services.update-status', $service) }}" onsubmit="return confirm('Terminate this service?')">
+            @csrf
+            <input type="hidden" name="status" value="terminated">
             <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm">Terminate</button>
         </form>
     </div>

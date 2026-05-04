@@ -76,8 +76,12 @@ class ServiceController extends Controller {
         // Sync customer status with service status
         if ($validated['status'] === 'active') {
             $service->customer->update(['status' => 'active', 'activation_date' => now()]);
-        } elseif (in_array($validated['status'], ['suspended'])) {
+        } elseif ($validated['status'] === 'suspended') {
             $service->customer->update(['status' => 'suspended_manual']);
+        } elseif ($validated['status'] === 'terminated') {
+            $service->customer->update(['status' => 'terminated']);
+        } elseif ($validated['status'] === 'disconnected') {
+            $service->customer->update(['status' => 'disconnected']);
         }
 
         return back()->with('success', 'Service status updated to ' . $validated['status']);
